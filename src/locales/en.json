@@ -1,0 +1,78 @@
+{
+  "nav": {
+    "services": "Services",
+    "projects": "Projects",
+    "contact": "Contact",
+    "cta": "Get a Quote",
+    "switchTo": "عربي"
+  },
+  "hero": {
+    "badge": "Spaces with Aura",
+    "titleLine1": "We Build Spaces",
+    "titleLine2": "That Redefine Luxury",
+    "description": "Aura Spaces delivers end-to-end construction and finishing for our most discerning clients — from precise structural engineering to the finest interior details, with uncompromising craftsmanship.",
+    "ctaPrimary": "Get a Quote",
+    "ctaSecondary": "View Our Work",
+    "imageCaption": "Luxury Interior Design, Cairo"
+  },
+  "services": {
+    "eyebrow": "What We Offer",
+    "title": "Comprehensive Services, Uncompromising Standards",
+    "description": "From the first concrete pour to the final finishing touch, our team delivers every phase of your project with precision and meticulous attention to detail.",
+    "items": {
+      "construction": {
+        "title": "General Construction",
+        "description": "End-to-end structural construction managed from foundation to handover, with precise engineering standards that guarantee durability."
+      },
+      "interior": {
+        "title": "Interior Design",
+        "description": "Bespoke interior designs that balance timeless elegance with liveable, practical luxury."
+      },
+      "finishing": {
+        "title": "Premium Finishing",
+        "description": "Meticulous attention to flooring, cladding and woodwork, crafted with the finest imported materials."
+      },
+      "smartHome": {
+        "title": "Smart Home Setup",
+        "description": "Seamless integration of lighting, security and climate systems for a fully connected, modern living experience."
+      }
+    }
+  },
+  "projects": {
+    "eyebrow": "Our Work",
+    "title": "Recent Projects",
+    "description": "A curated selection of residences and projects executed with our signature attention to detail.",
+    "empty": "New projects are on the way — stay tuned."
+  },
+  "contact": {
+    "eyebrow": "Get In Touch",
+    "title": "Start Your Project Today",
+    "description": "Share your vision and one of our project consultants will reach out within 24 hours with a tailored quote.",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Full Name",
+      "phone": "Phone Number",
+      "service": "Service Required",
+      "message": "Project Details",
+      "messagePlaceholder": "Tell us about your project...",
+      "submit": "Get a Quote",
+      "submitting": "Sending...",
+      "successTitle": "Thank You!",
+      "successText": "Your request has been received. Our team will be in touch shortly.",
+      "sendAnother": "Send Another Request",
+      "errorRequired": "Please provide your name and phone number.",
+      "errorGeneric": "Something went wrong. Please try again shortly.",
+      "successToast": "Your request has been sent successfully! Our team will contact you soon."
+    },
+    "serviceOptions": {
+      "General Construction": "General Construction",
+      "Interior Design": "Interior Design",
+      "Premium Finishing": "Premium Finishing",
+      "Smart Home Setup": "Smart Home Setup",
+      "Other": "Other"
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}

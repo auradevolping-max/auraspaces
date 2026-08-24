@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
-import { Menu, X } from 'lucide-react'
-
-const NAV_LINKS = [
-  { label: 'الخدمات', href: '#services' },
-  { label: 'أعمالنا', href: '#projects' },
-  { label: 'تواصل معنا', href: '#contact' },
-]
+import { Languages, Menu, X } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 export default function Navbar() {
+  const { t, i18n } = useTranslation()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+
+  const NAV_LINKS = [
+    { label: t('nav.services'), href: '#services' },
+    { label: t('nav.projects'), href: '#projects' },
+    { label: t('nav.contact'), href: '#contact' },
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -21,6 +23,10 @@ export default function Navbar() {
   const handleNavClick = (href) => {
     setMenuOpen(false)
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language === 'ar' ? 'en' : 'ar')
   }
 
   return (
@@ -56,22 +62,42 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-4">
+          <button
+            onClick={toggleLanguage}
+            dir="ltr"
+            aria-label="Switch language"
+            className="inline-flex items-center gap-1.5 rounded-md border border-brand-dark/15 px-3.5 py-2 text-xs font-semibold uppercase tracking-widest text-brand-dark/70 transition-colors hover:border-brand-gold/50 hover:text-brand-gold"
+          >
+            <Languages size={15} />
+            {t('nav.switchTo')}
+          </button>
           <button
             onClick={() => handleNavClick('#contact')}
             className="rounded-md bg-brand-gold px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand-gold/25 hover:bg-brand-dark transition-colors"
           >
-            اطلب مقايسة
+            {t('nav.cta')}
           </button>
         </div>
 
-        <button
-          className="md:hidden text-brand-dark"
-          onClick={() => setMenuOpen((open) => !open)}
-          aria-label="تبديل قائمة التنقل"
-        >
-          {menuOpen ? <X size={26} /> : <Menu size={26} />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <button
+            onClick={toggleLanguage}
+            dir="ltr"
+            aria-label="Switch language"
+            className="inline-flex items-center gap-1 rounded-md border border-brand-dark/15 px-2.5 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-dark/70"
+          >
+            <Languages size={14} />
+            {t('nav.switchTo')}
+          </button>
+          <button
+            className="text-brand-dark"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-label="Toggle navigation menu"
+          >
+            {menuOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
       </nav>
 
       {menuOpen && (
@@ -89,7 +115,7 @@ export default function Navbar() {
             onClick={() => handleNavClick('#contact')}
             className="rounded-md bg-brand-gold px-5 py-3 text-sm font-semibold text-white text-center shadow-md shadow-brand-gold/25 hover:bg-brand-dark transition-colors"
           >
-            اطلب مقايسة
+            {t('nav.cta')}
           </button>
         </div>
       )}

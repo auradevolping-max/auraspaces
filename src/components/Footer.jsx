@@ -1,13 +1,16 @@
-import { Link2, Mail, MapPin, Phone } from 'lucide-react'
+import { Mail, MapPin, Phone } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { useSettings } from '../context/SettingsContext'
 import { toMailtoLink, toWhatsAppLink } from '../utils/contactLinks'
+import { Facebook, Instagram } from './icons/SocialIcons'
 
 export default function Footer() {
+  const { t } = useTranslation()
   const { settings } = useSettings()
 
   const socialLinks = [
-    { label: 'Facebook', url: settings?.facebookUrl },
-    { label: 'Instagram', url: settings?.instagramUrl },
+    { key: 'facebook', url: settings?.facebookUrl, Icon: Facebook },
+    { key: 'instagram', url: settings?.instagramUrl, Icon: Instagram },
   ].filter((link) => link.url)
 
   const phones = (settings?.phones || []).filter((phone) => phone?.number)
@@ -55,17 +58,17 @@ export default function Footer() {
                 </span>
               )}
               {socialLinks.length > 0 && (
-                <div className="mt-1 flex items-center gap-4">
-                  {socialLinks.map((link) => (
+                <div className="mt-2 flex items-center gap-3">
+                  {socialLinks.map(({ key, url, Icon }) => (
                     <a
-                      key={link.label}
-                      href={link.url}
+                      key={key}
+                      href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-brand-dark/60 transition-colors hover:text-brand-gold"
+                      aria-label={key}
+                      className="flex h-9 w-9 items-center justify-center rounded-full border border-brand-dark/15 text-brand-dark/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-gold hover:bg-brand-gold hover:text-white"
                     >
-                      <Link2 size={14} />
-                      {link.label}
+                      <Icon size={16} />
                     </a>
                   ))}
                 </div>
@@ -75,7 +78,7 @@ export default function Footer() {
         </div>
 
         <p className="mt-8 border-t border-brand-dark/10 pt-6 text-xs text-brand-dark/40">
-          &copy; {new Date().getFullYear()} Aura Spaces. جميع الحقوق محفوظة.
+          &copy; {new Date().getFullYear()} Aura Spaces. {t('footer.rights')}
         </p>
       </div>
     </footer>

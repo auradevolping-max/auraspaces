@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, FolderKanban } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { subscribeToProjects } from '../services/projectsService'
 
 function ProjectCardSkeleton() {
@@ -15,7 +16,20 @@ function ProjectCardSkeleton() {
   )
 }
 
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.1 },
+  },
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+}
+
 export default function Projects() {
+  const { t } = useTranslation()
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -44,14 +58,13 @@ export default function Projects() {
           className="max-w-2xl"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-brand-gold">
-            أعمالنا
+            {t('projects.eyebrow')}
           </span>
           <h2 className="mt-3 font-display text-3xl text-brand-dark sm:text-4xl">
-            مشاريعنا الأخيرة
+            {t('projects.title')}
           </h2>
           <p className="mt-4 text-brand-dark/60 leading-relaxed">
-            مجموعة مختارة من المساكن والمشاريع المُنفذة بلمستنا المميزة في
-            الاهتمام بالتفاصيل.
+            {t('projects.description')}
           </p>
         </motion.div>
 
@@ -64,20 +77,23 @@ export default function Projects() {
         ) : projects.length === 0 ? (
           <div className="mt-14 flex flex-col items-center justify-center gap-3 rounded-xl border border-brand-dark/10 py-16 text-center">
             <FolderKanban size={28} className="text-brand-dark/30" />
-            <p className="text-sm text-brand-dark/50">
-              مشاريع جديدة في الطريق — تابعونا قريبًا.
-            </p>
+            <p className="text-sm text-brand-dark/50">{t('projects.empty')}</p>
           </div>
         ) : (
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, index) => (
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={containerVariants}
+            className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {projects.map((project) => (
               <motion.div
                 key={project.id}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.5, ease: 'easeOut', delay: (index % 3) * 0.08 }}
-                className="group relative overflow-hidden rounded-xl border border-brand-dark/10"
+                variants={cardVariants}
+                whileHover={{ y: -6, scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+                className="group relative overflow-hidden rounded-xl border border-brand-dark/10 hover:shadow-xl hover:shadow-brand-gold/20"
               >
                 <div className="aspect-[4/3] w-full bg-gradient-to-br from-brand-dark/10 via-brand-dark/15 to-brand-dark/25">
                   {project.imageUrl && (
@@ -105,7 +121,7 @@ export default function Projects() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
     </section>
