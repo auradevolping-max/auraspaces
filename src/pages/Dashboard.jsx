@@ -80,7 +80,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-navy-950 lg:flex">
+    <div dir="ltr" className="min-h-screen bg-navy-950 lg:flex">
       {/* Desktop sidebar */}
       <aside className="hidden w-64 shrink-0 border-r border-navy-800 bg-navy-900/60 lg:block">
         <SidebarContent user={user} onLogout={handleLogout} />

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Cairo:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,9 +9,9 @@ html {
 }
 
 body {
-  @apply bg-navy-950 font-sans text-navy-100 antialiased;
+  @apply bg-brand-cream font-sans text-brand-dark antialiased;
 }
 
 ::selection {
-  @apply bg-gold-500/30 text-white;
+  @apply bg-brand-gold/40 text-brand-dark;
 }

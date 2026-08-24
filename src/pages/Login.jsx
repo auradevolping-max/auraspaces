@@ -48,7 +48,10 @@ export default function Login() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-navy-950 px-6">
+    <div
+      dir="ltr"
+      className="flex min-h-screen items-center justify-center bg-navy-950 px-6"
+    >
       <div className="w-full max-w-sm">
         <div className="flex flex-col items-center text-center">
           <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 text-navy-950 shadow-gold">

@@ -4,12 +4,13 @@ import Services from '../components/Services'
 import Projects from '../components/Projects'
 import ContactForm from '../components/ContactForm'
 import Footer from '../components/Footer'
+import FloatingWhatsApp from '../components/FloatingWhatsApp'
 import { SettingsProvider } from '../context/SettingsContext'
 
 export default function Home() {
   return (
     <SettingsProvider>
-      <div className="min-h-screen bg-navy-950">
+      <div dir="rtl" lang="ar" className="min-h-screen bg-brand-cream text-brand-dark">
         <Navbar />
         <main>
           <Hero />
@@ -18,6 +19,7 @@ export default function Home() {
           <ContactForm />
         </main>
         <Footer />
+        <FloatingWhatsApp />
       </div>
     </SettingsProvider>
   )

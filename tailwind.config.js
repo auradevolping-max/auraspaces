@@ -4,6 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
+        brand: {
+          cream: '#FAF9F6',
+          gold: '#C5A880',
+          dark: '#2A2A2A',
+        },
         navy: {
           50: '#f2f5f9',
           100: '#e2e8f0',
@@ -32,7 +37,7 @@ export default {
       },
       fontFamily: {
         display: ['"Playfair Display"', 'serif'],
-        sans: ['"Inter"', 'system-ui', 'sans-serif'],
+        sans: ['"Cairo"', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         gold: '0 10px 30px -10px rgba(201, 152, 43, 0.35)',

@@ -57,10 +57,13 @@ service cloud.firestore {
 
     // The single global_settings document is fully optional field-by-field
     // (the form always sends all five, but this stays lenient either way).
+    // `phones` is a list of {label, number} maps — Firestore rules can't
+    // validate each list element's shape without loops, so this only bounds
+    // the list itself; the doc is admin-write-only anyway.
     function isValidSettings(data) {
-      return data.keys().hasOnly(['email', 'phone', 'address', 'facebookUrl', 'instagramUrl'])
+      return data.keys().hasOnly(['email', 'phones', 'address', 'facebookUrl', 'instagramUrl'])
         && (!('email' in data) || (data.email is string && data.email.size() <= 200))
-        && (!('phone' in data) || (data.phone is string && data.phone.size() <= 30))
+        && (!('phones' in data) || (data.phones is list && data.phones.size() <= 10))
         && (!('address' in data) || (data.address is string && data.address.size() <= 300))
         && (!('facebookUrl' in data) || (data.facebookUrl is string && data.facebookUrl.size() <= 300))
         && (!('instagramUrl' in data) || (data.instagramUrl is string && data.instagramUrl.size() <= 300));

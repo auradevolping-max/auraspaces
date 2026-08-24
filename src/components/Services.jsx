@@ -1,66 +1,76 @@
+import { motion } from 'framer-motion'
 import { HardHat, PaintBucket, Sofa, Wifi } from 'lucide-react'
 
 const SERVICES = [
   {
     icon: HardHat,
-    title: 'General Construction',
+    title: 'إنشاءات عامة',
     description:
-      'Full-scale structural builds managed from groundwork to handover, engineered for durability and precision.',
+      'أعمال بناء إنشائية متكاملة تُدار من الأساسات وحتى التسليم، بمعايير هندسية دقيقة تضمن المتانة.',
   },
   {
     icon: Sofa,
-    title: 'Interior Design',
+    title: 'تصميم داخلي',
     description:
-      'Bespoke interior concepts that balance timeless elegance with functional, livable luxury.',
+      'تصاميم داخلية مُصممة خصيصًا توازن بين الأناقة الخالدة والرفاهية العملية القابلة للحياة.',
   },
   {
     icon: PaintBucket,
-    title: 'Premium Finishing',
+    title: 'تشطيبات فاخرة',
     description:
-      'Meticulous detailing in flooring, cladding, and millwork using the finest imported materials.',
+      'دقة متناهية في تفاصيل الأرضيات والتكسيات والأعمال الخشبية باستخدام أرقى الخامات المستوردة.',
   },
   {
     icon: Wifi,
-    title: 'Smart Home Setup',
+    title: 'إعداد المنزل الذكي',
     description:
-      'Seamless integration of lighting, security, and climate automation for modern connected living.',
+      'دمج سلس لأنظمة الإضاءة والأمان والتحكم بالمناخ لتجربة معيشة عصرية ومتصلة بالكامل.',
   },
 ]
 
 export default function Services() {
   return (
-    <section id="services" className="bg-navy-900 py-24 lg:py-32">
+    <section id="services" className="bg-white py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="max-w-2xl">
-          <span className="text-xs font-semibold uppercase tracking-widest text-gold-400">
-            What We Do
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="max-w-2xl"
+        >
+          <span className="text-xs font-semibold uppercase tracking-widest text-brand-gold">
+            ماذا نقدّم
           </span>
-          <h2 className="mt-3 font-display text-3xl text-white sm:text-4xl">
-            Comprehensive Services, Uncompromising Standards
+          <h2 className="mt-3 font-display text-3xl text-brand-dark sm:text-4xl">
+            خدمات متكاملة بمعايير لا تقبل المساومة
           </h2>
-          <p className="mt-4 text-navy-300 leading-relaxed">
-            From the first foundation pour to the final polished surface, our
-            team delivers every phase of your project with precision and
-            care.
+          <p className="mt-4 text-brand-dark/60 leading-relaxed">
+            من أول صبة خرسانية وحتى آخر لمسة تشطيب، يقدّم فريقنا كل مرحلة من
+            مشروعك بدقة واهتمام تام بالتفاصيل.
           </p>
-        </div>
+        </motion.div>
 
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {SERVICES.map(({ icon: Icon, title, description }) => (
-            <div
+          {SERVICES.map(({ icon: Icon, title, description }, index) => (
+            <motion.div
               key={title}
-              className="group relative rounded-xl border border-navy-800 bg-navy-950/60 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold-500/40 hover:shadow-gold"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.08 }}
+              className="group relative rounded-xl border border-brand-dark/10 bg-brand-cream p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand-gold/50 hover:shadow-lg hover:shadow-brand-gold/15"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gold-500/10 text-gold-400 transition-colors group-hover:bg-gold-500 group-hover:text-navy-950">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-gold/15 text-brand-gold transition-colors group-hover:bg-brand-gold group-hover:text-white">
                 <Icon size={24} strokeWidth={1.75} />
               </div>
-              <h3 className="mt-6 font-display text-lg text-white">
+              <h3 className="mt-6 font-display text-lg text-brand-dark">
                 {title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-navy-300">
+              <p className="mt-3 text-sm leading-relaxed text-brand-dark/60">
                 {description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -1,5 +1,6 @@
-import { Building2, Link2, Mail, MapPin, Phone } from 'lucide-react'
+import { Link2, Mail, MapPin, Phone } from 'lucide-react'
 import { useSettings } from '../context/SettingsContext'
+import { toMailtoLink, toWhatsAppLink } from '../utils/contactLinks'
 
 export default function Footer() {
   const { settings } = useSettings()
@@ -9,36 +10,47 @@ export default function Footer() {
     { label: 'Instagram', url: settings?.instagramUrl },
   ].filter((link) => link.url)
 
+  const phones = (settings?.phones || []).filter((phone) => phone?.number)
+
   return (
-    <footer className="border-t border-navy-800 bg-navy-950 py-12">
+    <footer className="border-t border-brand-dark/10 bg-white py-12">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-gold-400 to-gold-600 text-navy-950">
-              <Building2 size={16} strokeWidth={2.25} />
-            </span>
-            <span className="font-display text-base text-white">
-              Aura <span className="text-gold-400">Spaces</span>
-            </span>
-          </div>
+          <img
+            src="/logo.jpg"
+            alt="Aura Spaces"
+            className="h-10 object-contain"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none'
+            }}
+          />
 
           {settings && (
-            <div className="flex flex-col gap-2 text-sm text-navy-400 sm:items-end">
-              {settings.phone && (
-                <span className="flex items-center gap-2">
-                  <Phone size={14} className="text-navy-500" />
-                  {settings.phone}
-                </span>
-              )}
+            <div className="flex flex-col gap-2 text-sm text-brand-dark/60 sm:items-end">
+              {phones.map((phone) => (
+                <a
+                  key={phone.number}
+                  href={toWhatsAppLink(phone.number)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 transition-colors hover:text-brand-gold"
+                >
+                  <Phone size={14} className="text-brand-dark/40" />
+                  {phone.label ? `${phone.label}: ${phone.number}` : phone.number}
+                </a>
+              ))}
               {settings.email && (
-                <span className="flex items-center gap-2">
-                  <Mail size={14} className="text-navy-500" />
+                <a
+                  href={toMailtoLink(settings.email)}
+                  className="flex items-center gap-2 transition-colors hover:text-brand-gold"
+                >
+                  <Mail size={14} className="text-brand-dark/40" />
                   {settings.email}
-                </span>
+                </a>
               )}
               {settings.address && (
                 <span className="flex items-center gap-2">
-                  <MapPin size={14} className="text-navy-500" />
+                  <MapPin size={14} className="text-brand-dark/40" />
                   {settings.address}
                 </span>
               )}
@@ -50,7 +62,7 @@ export default function Footer() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-navy-400 transition-colors hover:text-gold-400"
+                      className="flex items-center gap-1.5 text-brand-dark/60 transition-colors hover:text-brand-gold"
                     >
                       <Link2 size={14} />
                       {link.label}
@@ -62,8 +74,8 @@ export default function Footer() {
           )}
         </div>
 
-        <p className="mt-8 border-t border-navy-800 pt-6 text-xs text-navy-500">
-          &copy; {new Date().getFullYear()} Aura Spaces. All rights reserved.
+        <p className="mt-8 border-t border-brand-dark/10 pt-6 text-xs text-brand-dark/40">
+          &copy; {new Date().getFullYear()} Aura Spaces. جميع الحقوق محفوظة.
         </p>
       </div>
     </footer>
